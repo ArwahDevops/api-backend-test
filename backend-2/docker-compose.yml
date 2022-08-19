@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  backend-2:
+    container_name: backend-2
+    build: .
+    command: uvicorn app.main:app --host 0.0.0.0 --workers 2
+    volumes:
+      - backend-2-vol-development:/app
+    ports:
+      - 8082:8000
+    networks:
+      - environment-development
+    
+networks:
+  environment-development:
+    name: environment-development
+    external: true
+volumes:
+  backend-2-vol-development:
+    name: backend-2-vol-development
+    external: true
